@@ -27,7 +27,7 @@
       </ul>
       <canvas id="canvas"></canvas>
       <div class="button-wrapper">
-        <button onclick="playSong()" id="play" class="play-button" type="button"><img src="./play.svg" alt="play-button"></button>
+        <button onclick="playSong()" id="play" class="play-button" type="button"><img src="play.svg" alt="play-button"></button>
       </div>
     </div>
 `;const n=t.querySelector("#thefile");n.onchange=function(){let e=this.files;a.src=URL.createObjectURL(e[0]),a.load(),a.play(),s()};function s(){var e=new AudioContext,i=e.createMediaElementSource(a),r=e.createAnalyser(),c=document.getElementById("canvas");c.width=window.innerWidth,c.height=window.innerHeight;var d=c.getContext("2d");i.connect(r),r.connect(e.destination),r.fftSize=256;var l=r.frequencyBinCount;console.log(l);var y=new Uint8Array(l),v=c.width,g=c.height,b=v/l*2.5,f,h=0;function w(){requestAnimationFrame(w),h=0,r.getByteFrequencyData(y),d.fillStyle="#000",d.fillRect(0,0,v,g);for(var u=0;u<l;u++){f=y[u];var S=f+25*(u/l),q=250*(u/l),T=50;d.fillStyle="rgb("+S+","+q+","+T+")",d.fillRect(h,g-f,b,f),h+=b+1}}a.play(),w()}const o=t.querySelector("#play");o.onclick=()=>{a.paused?(a.play(),s()):a.pause()}}window.onload=function(){};
